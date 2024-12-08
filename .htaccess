@@ -1,0 +1,16 @@
+<IfModule mod_mime.c>
+    AddType application/javascript .mjs
+</IfModule>
+
+# Assicurati che il rewrite module sia attivo
+RewriteEngine On
+
+# Imposta il base path del progetto
+RewriteBase /web-dev-proj/
+
+# Non riscrivere richieste a file o directory esistenti
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Reindirizza tutte le altre richieste a index.html
+RewriteRule ^ index.html [L]
