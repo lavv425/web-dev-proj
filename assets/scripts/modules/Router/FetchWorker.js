@@ -7,7 +7,7 @@ self.onmessage = async function (event) {
 
         const html = await response.text();
 
-        // Invia il risultato al thread principale
+        // Send the html to the main thread
         self.postMessage({ success: true, path, html });
     } catch (error) {
         self.postMessage({ success: false, path, error: error.message });

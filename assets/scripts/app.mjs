@@ -1,13 +1,20 @@
-import Router from "./modules/router/router.mjs";
+import Router from "./modules/Router/Router.mjs";
 
 const routes = {
     "/": "pages/index.html",
     "/about": "pages/about.html",
+    "/resume": "pages/resume.html",
     "/contact": "pages/contact-me.html",
 };
 
-const router = new Router(routes, {
+
+const config = {
     selector: "#app",
     isPathRelative: true,
     basePath: "/web-dev-proj",
-});
+    cachePages: false
+};
+
+const routerInstance = new Router(routes, config);
+
+export default routerInstance;

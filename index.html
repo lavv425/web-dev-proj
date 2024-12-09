@@ -36,16 +36,15 @@
 </head>
 
 <body>
-    <nav>
-        <div to="/" data-link>Home</div>
-        <div to="/about" data-link>About</div>
-        <div to="/contact" data-link>Contact</div>
+    <nav class="navbar">
+        <div to="/" class="nav-link" data-link>Home</div>
+        <div to="/about" class="nav-link" data-link>About</div>
+        <div to="/resume" class="nav-link" data-link>Resume</div>
+        <div to="/contact" class="nav-link" data-link>Contact</div>
     </nav>
-    <div class="page-container" id="app">
-        <h2>Welcome to my portfolio!</h2>
-        <p>Hi, I am Michael, and this is the portfolio project</p>
-    </div>
+    <div id="app"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 </body>
 <script type="module" src="./assets/scripts/app.mjs"></script>
+<script type="module" src="./assets/scripts/navbar.mjs"></script>
 </html>
