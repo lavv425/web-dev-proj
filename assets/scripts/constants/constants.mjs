@@ -13,7 +13,7 @@ export const ROUTER_CONFIG = {
     config: {
         selector: "#app",
         isPathRelative: true,
-        basePath: PREFIX_BASE_PATH,
+        basePath: PREFIX_BASE_PATH, // if your site is at ex.https://web-dev-proj.michaellavigna.com/ just  put "" or don't include this property in your config
         cachePages: false
     }
 };

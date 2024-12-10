@@ -13,8 +13,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # Redirect all reqs to index.html
 RewriteRule ^ index.html [L]
-
-# Remove the .php extension
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^([^\.]+)/?$ $1.php [L]

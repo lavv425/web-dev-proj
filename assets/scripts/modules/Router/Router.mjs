@@ -27,7 +27,7 @@ class Router {
      * @type {RouterConfig}
      * @private
      */
-    #config = { selector: "#app", isPathRelative: true, basePath: "/", cachePages: true };
+    #config = { selector: "#app", isPathRelative: true, basePath: "", cachePages: true };
 
     /** @type {HTMLElement} The container where the pages will be loaded */
     #container;
@@ -75,6 +75,7 @@ class Router {
             }
 
             // Initialize the Web Worker
+            const bp = this.#config.basePath === "/" ? "" : "/";
             const workerPath = this.#typer.isType("s", `${this.#config.basePath}/assets/scripts/modules/Router/FetchWorker.js`);
 
             this.#worker = new Worker(workerPath);
