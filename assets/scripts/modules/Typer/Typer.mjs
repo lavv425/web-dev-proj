@@ -19,7 +19,7 @@ export default class Typer {
     constructor() {
         /**
          * @private
-         * @type {Object.<string, Function>}
+         * @type {Record<string, Function>}
          */
         this.#TypesMap = {
             'a': this.#tArray,

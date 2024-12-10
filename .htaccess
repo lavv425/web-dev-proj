@@ -2,15 +2,19 @@
     AddType application/javascript .mjs
 </IfModule>
 
-# Assicurati che il rewrite module sia attivo
 RewriteEngine On
 
-# Imposta il base path del progetto
+# Set the project base path (in my case it's /web-dev-proj/)
 RewriteBase /web-dev-proj/
 
-# Non riscrivere richieste a file o directory esistenti
+# Do not send reqs to existing files
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Reindirizza tutte le altre richieste a index.html
+# Redirect all reqs to index.html
 RewriteRule ^ index.html [L]
+
+# Remove the .php extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)/?$ $1.php [L]

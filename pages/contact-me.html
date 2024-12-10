@@ -1,5 +1,6 @@
 
 <head>
+    <script src="assets/scripts/contactMe.mjs" type="module"></script>
     <title>Michael Lavigna - Contact Me</title>
 </head>
 
@@ -8,14 +9,14 @@
         <div class="contact-container">
             <h2>Contact Me</h2>
             <div class="social-links">
-                <a href="https://www.linkedin.com/in/hi-im-michael" rel="noopener" target="_blank">LinkedIn</a>
-                <a href="https://github.com/lavv425" rel="noopener" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/hi-im-michael" rel="noopener" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                <a href="https://github.com/lavv425" rel="noopener" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
             </div>
             <div class="contact-form">
-                <input type="text" name="name" placeholder="Your Name">
-                <input type="email" name="email" placeholder="Your Email">
-                <textarea name="message" placeholder="Your Message" rows="5"></textarea>
-                <button type="submit">Send Message</button>
+                <input type="text" id="form-name" name="name" placeholder="Your Name" autocomplete="off">
+                <input type="email" id="form-email" name="email" placeholder="Your Email" autocomplete="off">
+                <textarea id="form-message" name="message" placeholder="Your Message" rows="5" autocomplete="off"></textarea>
+                <button id="contact-me-button" class="contact-form-button flex-mg-10"><i class="fa-regular fa-paper-plane fa-lg"></i> Send Message</button>
             </div>
         </div>
     </div>

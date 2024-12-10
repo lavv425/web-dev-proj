@@ -32,6 +32,7 @@
     <script src="./assets/scripts/libs/sweetalert/sweetalert2.all.min.js"></script>
     <link href="./assets/scripts/libs/fontawesome/css/all.min.css" rel="stylesheet">
     <link href="./assets/styles/sweetalert2.min.css" rel="stylesheet">
+    <link href="./assets/styles/loader.css" rel="stylesheet">
     <title>Michael Lavigna</title>
 </head>
 
@@ -40,11 +41,15 @@
         <div to="/" class="nav-link" data-link>Home</div>
         <div to="/about" class="nav-link" data-link>About</div>
         <div to="/resume" class="nav-link" data-link>Resume</div>
-        <div to="/contact" class="nav-link" data-link>Contact</div>
+        <div to="/contact-me" class="nav-link" data-link>Contact Me</div>
     </nav>
     <div id="app"></div>
+    <div class="loading-container-page" id="loading-page">
+        <div class="loader"></div>
+    </div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 </body>
 <script type="module" src="./assets/scripts/app.mjs"></script>
 <script type="module" src="./assets/scripts/navbar.mjs"></script>
+<script type="module" src="./assets/scripts/utils/goToTop.js"></script>
 </html>

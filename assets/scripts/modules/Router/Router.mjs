@@ -1,4 +1,5 @@
-import Typer from "../Typer/Typer.js";
+"use strict";
+import Typer from "../Typer/Typer.mjs";
 
 /**
  * @typedef {Object} RouterConfig
@@ -13,7 +14,9 @@ import Typer from "../Typer/Typer.js";
  */
 
 /**
- * A Router class to manage SPA routing.
+ * Class representing a router to manage SPA routing..
+ * @author Michael Lavigna
+ * @version 1.3
  */
 class Router {
     /** @type {Routes} Routes configuration */
@@ -24,7 +27,7 @@ class Router {
      * @type {RouterConfig}
      * @private
      */
-    #config = { selector: "#app", isPathRelative: true, basePath: "/web-dev-proj", cachePages: true };
+    #config = { selector: "#app", isPathRelative: true, basePath: "/", cachePages: true };
 
     /** @type {HTMLElement} The container where the pages will be loaded */
     #container;
@@ -104,7 +107,7 @@ class Router {
             const { headElements, bodyContent } = this.#parseDom(data.html);
 
             // Update the <head> content
-            this.#updateHead(headElements);
+            await this.#updateHead(headElements);
 
             // Update the <body> content
             this.#container.innerHTML = bodyContent;
@@ -178,7 +181,7 @@ class Router {
     * Updates the document head with new elements returned from the worker.
     * @param {Object} headElements - An object containing the returned head elements (title, links, scripts, metas).
     */
-    #updateHead(headElements) {
+    async #updateHead(headElements) {
         const { title, links, scripts, metas } = headElements;
 
         // Updates the title (if a new one is present)
@@ -193,6 +196,8 @@ class Router {
         // Remove old dynamics <link> e <script>. Dynamics links and scripts are defined with [data-key] prop
         document.querySelectorAll("head link[data-key], head script[data-key]").forEach(el => el.remove());
 
+        // Promises for loading links and scripts, so that they are loaded before the body
+        const loadPromises = [];
         // Adds new <link> if not already present (present means it's already there 1:1)
         links.forEach((link) => {
             const existingLink = Array.from(document.querySelectorAll("head link")).find(existing => {
@@ -207,6 +212,14 @@ class Router {
                     linkElement.setAttribute(attr.name, attr.value);
                 });
                 linkElement.setAttribute("data-key", "dynamic"); // Dynamic identifier
+
+                // Load event listener
+                const loadPromise = new Promise((resolve, reject) => {
+                    linkElement.onload = resolve;
+                    linkElement.onerror = reject;
+                });
+                loadPromises.push(loadPromise);
+
                 document.head.appendChild(linkElement);
             }
         });
@@ -225,6 +238,13 @@ class Router {
                     scriptElement.setAttribute(attr.name, attr.value);
                 });
                 scriptElement.setAttribute("data-key", "dynamic"); // Dynamic identifier
+
+                const loadPromise = new Promise((resolve, reject) => {
+                    scriptElement.onload = resolve;
+                    scriptElement.onerror = reject;
+                });
+                loadPromises.push(loadPromise);
+
                 document.head.appendChild(scriptElement);
             }
         });
@@ -246,6 +266,8 @@ class Router {
                 document.head.appendChild(metaElement);
             }
         });
+
+        return Promise.all(loadPromises);
     }
 
     /**
@@ -367,7 +389,7 @@ class Router {
     getCurrentPath() { return this.#currentPath }
 
     getLastPath() { return this.#lastFullPath }
-    
+
     getRegisteredRoutes() { return this.#routes }
 
     getRegisteredContainer() { return this.#container }

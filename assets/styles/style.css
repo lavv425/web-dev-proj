@@ -2,6 +2,7 @@
 
 :root {
   --nav-height: 45px;
+  --pages-container-padding: 20px;
 }
 * {
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -20,9 +21,14 @@
 body {
   margin: 0;
   background: white;
+  background: linear-gradient(to bottom right, #01163b, #40619a);
   /* background: #fafafa; */
   /* background: #fffbf3; */
   /* background: #f8f8f8; */
+}
+::selection {
+  background-color: #ffb833;
+  color: #000000;
 }
 
 .go-to-top {
@@ -46,6 +52,9 @@ body {
   background: #0e3d6e;
 }
 
+#app {
+  min-height: calc(100vh - var(--nav-height) - 32px);
+}
 nav {
   display: flex;
   justify-content: center;
@@ -89,6 +98,10 @@ nav div:hover::before {
 }
 
 nav div:hover {
+  background: #0c143c;
+}
+
+nav div:active {
   background: #000000;
 }
 
@@ -102,32 +115,95 @@ nav div span {
   color: #fff;
   font-weight: bold;
 }
-/* About page */
-.about {
-  padding: 50px;
-  background: #f9f9f9;
-  text-align: center;
+
+button {
+  padding: 10px 20px;
+  background: #ffd700;
   color: #333;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
 }
 
+button:hover {
+  background: #ffa500;
+}
+
+.flex-mg-10 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.cta {
+  padding: 20px;
+  font-size: 18px;
+}
+
+/* Index Page */
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--nav-height) - 32px);
+  text-align: center;
+  /* background: linear-gradient(to bottom right, #1e3c72, #2a5298); */
+  /* background: linear-gradient(to bottom right, #01163b, #40619a); */
+  color: #fff;
+}
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #fff;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+/* About Page */
+
+.about {
+  color: #fff;
+}
+
+.about h2 {
+  /* background: #f9f9f9; */
+  text-align: center;
+}
+
+.about-container {
+  padding: var(--pages-container-padding);
+}
 .about-container h2 {
   font-size: 2rem;
   margin-bottom: 20px;
 }
 
 .about-container p {
-  font-size: 1.2rem;
   line-height: 1.8;
-  max-width: 600px;
+  max-width: 80%;
   margin: 0 auto;
 }
 
 /* Resume Page */
-
 .resume {
-  padding: 50px;
-  background: #fff;
+  padding: var(--pages-container-padding);
+  /* background: #fff; */
   text-align: center;
+  color: white;
 }
 
 .resume-container h2 {
@@ -143,11 +219,22 @@ nav div span {
 }
 
 .card {
-  background: #f0f0f0;
+  /* background: #f3ad4d; */
+  background: #f9c74f;
   padding: 20px;
   border-radius: 8px;
-  max-width: 300px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  min-height: 350px;
+  box-shadow: 0 4px 6px rgb(174 132 44 / 89%);
+  color: black;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card:hover {
+  background: #f3b03c;
+  box-shadow: 0 4px 6px rgb(190 152 72 / 89%);
 }
 
 .card h3 {
@@ -155,11 +242,19 @@ nav div span {
   font-size: 1.5rem;
 }
 
-/* Contact Me Page */
+.card p,
+.card ul {
+  flex-grow: 1;
+}
 
+.card ul {
+  list-style-type: none;
+  padding: 0;
+}
+/* Contact Me Page */
 .contact {
-  padding: 50px;
-  background: #1e3c72;
+  padding: var(--pages-container-padding);
+  /* background: #1e3c72; */
   color: #fff;
   text-align: center;
 }
@@ -169,11 +264,18 @@ nav div span {
   margin-bottom: 30px;
 }
 
+.social-links {
+  display: flex;
+  justify-content: center;
+}
 .social-links a {
-  margin: 0 10px;
+  margin: 0 18px;
   color: #ffd700;
   text-decoration: none;
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .social-links a:hover {
@@ -181,6 +283,10 @@ nav div span {
 }
 
 .contact-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin-top: 30px;
 }
 
@@ -195,24 +301,24 @@ nav div span {
   outline: none;
 }
 
-.contact-form button {
-  padding: 10px 20px;
-  background: #ffd700;
-  color: #333;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s;
+.contact-form-button {
+  margin-top: 25px;
+  width: 350px;
 }
 
-.contact-form button:hover {
-  background: #ffa500;
-}
-
-
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
   nav div {
     font-size: 0.9rem;
     padding: 10px;
+  }
+
+  .contact-form-button {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .card {
+    width: 600px;
   }
 }
