@@ -107,11 +107,11 @@ class Router {
 
             const { headElements, bodyContent } = this.#parseDom(data.html);
 
-            // Update the <head> content
-            await this.#updateHead(headElements);
-
             // Update the <body> content
             this.#container.innerHTML = bodyContent;
+
+            // Update the <head> content
+            await this.#updateHead(headElements);
 
             // Trigger the "DOMContentLoaded" event
             document.dispatchEvent(new Event("DOMContentLoaded"));
@@ -315,8 +315,8 @@ class Router {
             const cachedPage = await this.#getCachedPage(fullPath);
             if (cachedPage) {
                 const { headElements, bodyContent } = this.#parseDom(cachedPage);
-                this.#updateHead(headElements);
                 this.#container.innerHTML = bodyContent;
+                this.#updateHead(headElements);
                 return;
             }
 
