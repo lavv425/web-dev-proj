@@ -5,6 +5,8 @@ This project consists of two main parts:
 1. **Frontend**: Vanilla JS/CSS/HTML, with SPA routing enabled by the class Router (assets/scripts/modules/Router/Router.mjs).
 2. **Backend**: Built with PHP (2 very small APIs).
 
+## Online demo available at https://web-dev-proj.michaellavigna.com/
+
 ## General Setup
 
 ### Prerequisites
@@ -20,11 +22,32 @@ This project consists of two main parts:
 
    - Create a MySQL user and schema.
    - Example SQL:
+
      ```sql
      CREATE DATABASE web_dev_proj_db;
      CREATE USER 'web_dev_proj_db'@'localhost' IDENTIFIED BY 'your_password';
      GRANT SELECT, INSERT ON web_dev_proj_db.* TO 'web_dev_proj_db'@'localhost';
      FLUSH PRIVILEGES;
+     ```
+
+   - Create the database tables.
+
+     ```sql
+      CREATE TABLE contacts (
+      id_contact int NOT NULL AUTO_INCREMENT,
+      name varchar(90) NOT NULL,
+      email varchar(45) NOT NULL,
+      message text NOT NULL,
+      date_time_contact datetime NOT NULL DEFAULT current_timestamp(),
+      PRIMARY KEY (`id_contact`)
+      );
+
+      CREATE TABLE views (
+      id_view int NOT NULL AUTO_INCREMENT,
+      event text NOT NULL,
+      date_time_view datetime NOT NULL DEFAULT current_timestamp(),
+      PRIMARY KEY (`id_view`)
+      );
      ```
 
 2. **Environment File**:
@@ -51,4 +74,4 @@ This project consists of two main parts:
         MAIL_REPLY_TO_NAME="your_mail_reply_to_name"
      ```
      - Replace `your_db_user_password` with the database password.
-     - Replace all the MAIL_* variables with yours.
+     - Replace all the MAIL\_\* variables with yours.
