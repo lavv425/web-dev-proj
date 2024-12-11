@@ -107,14 +107,16 @@ class Router {
 
             const { headElements, bodyContent } = this.#parseDom(data.html);
 
-            // Update the <head> content
-            await this.#updateHead(headElements);
+            await this.#composeDom(headElements, bodyContent);
 
-            // Update the <body> content
-            this.#container.innerHTML = bodyContent;
+            // // Update the <head> content
+            // await this.#updateHead(headElements);
 
-            // Trigger the "DOMContentLoaded" event
-            document.dispatchEvent(new Event("DOMContentLoaded"));
+            // // Update the <body> content
+            // this.#container.innerHTML = bodyContent;
+
+            // // Trigger the "DOMContentLoaded" event
+            // document.dispatchEvent(new Event("DOMContentLoaded"));
 
             // // Append the HTML fetched by the worker
             // this.#container.innerHTML = data.html;
@@ -315,9 +317,7 @@ class Router {
             const cachedPage = await this.#getCachedPage(fullPath);
             if (cachedPage) {
                 const { headElements, bodyContent } = this.#parseDom(cachedPage);
-                this.#updateHead(headElements);
-                this.#container.innerHTML = bodyContent;
-                document.dispatchEvent(new Event("DOMContentLoaded"));
+                await this.#composeDom(headElements, bodyContent);
                 return;
             }
 
@@ -342,6 +342,12 @@ class Router {
         };
 
         return { bodyContent, headElements };
+    }
+
+    async #composeDom(head, body) {
+        this.#container.innerHTML = body;
+        await this.#updateHead(head);
+        document.dispatchEvent(new Event("DOMContentLoaded"));
     }
     /**
      * Normalizes the path by removing the basePath and trailing slash.
